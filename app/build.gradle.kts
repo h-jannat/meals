@@ -34,7 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -61,10 +61,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     // ViewModel
-     implementation(libs.androidx.lifecycle.viewmodel.compose)
-   //gson for json
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    //gson for json
     implementation(libs.retrofitGson)
-   //api requests
+    //api requests
     implementation(libs.retrofit2)
     //images
     implementation(libs.coil)
