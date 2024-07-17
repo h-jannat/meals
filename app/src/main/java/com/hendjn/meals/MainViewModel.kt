@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
     private var _categoriesState: MutableState<RecipesState> = mutableStateOf(RecipesState())
     val categoriesState: State<RecipesState> = _categoriesState
 
@@ -18,10 +18,14 @@ class MainViewModel() : ViewModel() {
         val error: String? = null
     )
 
+    init {
+        getCategories()
+    }
+
     private fun getCategories() {
         viewModelScope.launch {
             try {
-                val response: CategoriesResponse = recpesService.getCategories()
+                val response: CategoriesResponse = recipesService.getCategories()
                 _categoriesState.value = RecipesState(loading = false, list = response.categories)
             } catch (e: Exception) {
                 _categoriesState.value = _categoriesState.value.copy(
