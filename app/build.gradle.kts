@@ -68,6 +68,8 @@ dependencies {
     implementation(libs.retrofit2)
     //images
     implementation(libs.coil)
+    //navigation
+    implementation(libs.nav)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
