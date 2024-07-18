@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.coil)
     //navigation
     implementation(libs.nav)
+    //runtime
+    implementation(libs.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

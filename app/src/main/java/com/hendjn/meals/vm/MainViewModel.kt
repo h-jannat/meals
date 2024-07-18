@@ -1,11 +1,13 @@
-package com.hendjn.meals
+package com.hendjn.meals.vm
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hendjn.meals.api.recipesService
+import com.hendjn.meals.models.CategoriesResponse
+import com.hendjn.meals.models.Category
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
@@ -14,9 +16,11 @@ class MainViewModel : ViewModel() {
 
     data class RecipesState(
         val loading: Boolean = true,
+        val selectedCategory: Category? = null,
         val list: List<Category> = emptyList(),
-        val error: String? = null
-    )
+        val error: String? = null,
+
+        )
 
     init {
         getCategories()
@@ -34,6 +38,14 @@ class MainViewModel : ViewModel() {
                 )
             }
         }
+    }
+
+    fun selectCategory(category: Category) {
+
+        _categoriesState.value = _categoriesState.value.copy(
+            selectedCategory = category
+        )
+
     }
 
 }

@@ -1,10 +1,14 @@
 package com.hendjn.meals.screens
 
+
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -16,22 +20,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.hendjn.meals.Category
-import com.hendjn.meals.MainViewModel
 import com.hendjn.meals.components.NavBar
+import com.hendjn.meals.models.Category
+import com.hendjn.meals.vm.MainViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecipeScreen(navController: NavController) {
-    val recipeViewModel: MainViewModel = viewModel()
+fun RecipeScreen(navController: NavController, recipeViewModel: MainViewModel) {
     val viewState by recipeViewModel.categoriesState
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -49,7 +50,7 @@ fun RecipeScreen(navController: NavController) {
 
                     viewState.list.forEachIndexed { _, category ->
                         item(span = { GridItemSpan(1) }) {
-                            CategoryItem(category, navController)
+                            CategoryItem(category, navController, recipeViewModel)
                         }
 //
                     }
@@ -62,9 +63,16 @@ fun RecipeScreen(navController: NavController) {
 }
 
 @Composable
-fun CategoryItem(category: Category, navController: NavController) {
-    Card(modifier = Modifier.fillMaxWidth(0.5f).padding(5.dp), onClick = {
+fun CategoryItem(category: Category, navController: NavController, recipeViewModel: MainViewModel) {
+
+    fun goToSingleCategory() {
+        recipeViewModel.selectCategory(category)
         navController.navigate("/single-category")
+    }
+
+    Card(modifier = Modifier.fillMaxWidth(0.5f).padding(5.dp), onClick = {
+        goToSingleCategory()
+
     }) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -73,7 +81,12 @@ fun CategoryItem(category: Category, navController: NavController) {
             AsyncImage(
                 model = category.strCategoryThumb,
                 contentDescription = category.strCategory,
+                modifier = Modifier.clickable(onClick = {
+                    goToSingleCategory()
+                }
+                ),
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Text(category.strCategory)
         }
     }

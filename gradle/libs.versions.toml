@@ -13,7 +13,7 @@ retrofitVersion = "2.11.0"
 retrofitGsonVersion = "2.11.0"
 coilVersion = '2.6.0'
 navVersion = "2.7.7"
-
+runtimeVersion = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +38,7 @@ retrofit2 = { group = 'com.squareup.retrofit2', name = 'retrofit', version.ref =
 retrofitGson = { group = 'com.squareup.retrofit2', name = 'converter-gson', version.ref = 'retrofitGsonVersion' }
 coil = { group = 'io.coil-kt', name = 'coil-compose', version.ref = 'coilVersion' }
 nav = { group = 'androidx.navigation', name = 'navigation-compose', version.ref = 'navVersion' }
+runtime = { group = 'androidx.compose.runtime', name = 'runtime', version.ref = 'runtimeVersion' }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
